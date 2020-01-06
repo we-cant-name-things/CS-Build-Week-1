@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'adv_project.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'local': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('NAME'),
         'USER': config('USER'),
