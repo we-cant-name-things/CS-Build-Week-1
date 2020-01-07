@@ -7,10 +7,10 @@ class Player(models.Model):
     water = models.IntegerField()
 
 
-class Places(models.Model):
-    state = models.CharField(max_length=30)
-    city = models.CharField(max_length=30)
-    location = models.CharField(max_length=30)
-    food_available = models.IntegerField()
-    water_available = models.IntegerField()
+class Place(models.Model):
+    state = models.CharField(max_length=30, blank=False)
+    city = models.CharField(max_length=30, blank=False)
+    location = models.CharField(max_length=30, blank=False)
+    food_available = models.IntegerField(blank=False)
+    water_available = models.IntegerField(blank=False)
 

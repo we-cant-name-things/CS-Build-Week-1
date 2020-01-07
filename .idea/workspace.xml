@@ -4,23 +4,9 @@
     <list default="true" id="25b92a11-d282-448e-8893-0096b50297b5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/adv_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/adv_project/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adv_project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/adv_project/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adventure/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/canada_adv/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/canada_adv/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canada_adv/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/canada_adv/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/canada_adv/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,47 +17,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/adv_project/settings.py">
+        <entry file="file://$PROJECT_DIR$/canada_adv/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/canada_adv/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="153">
+              <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/canada_adv/models.py">
+        <entry file="file://$PROJECT_DIR$/canada_adv/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/adv_project/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            <state relative-caret-position="85">
+              <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/adv_project/wsgi.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -86,15 +49,16 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/api/models.py" />
-        <option value="$PROJECT_DIR$/adv_project/urls.py" />
         <option value="$PROJECT_DIR$/adv_project/settings.py" />
+        <option value="$PROJECT_DIR$/adv_project/urls.py" />
         <option value="$PROJECT_DIR$/canada_adv/models.py" />
+        <option value="$PROJECT_DIR$/canada_adv/admin.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-15" />
-    <option name="width" value="1950" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1905" />
+    <option name="width" value="1948" />
     <option name="height" value="2175" />
   </component>
   <component name="ProjectView">
@@ -108,6 +72,11 @@
             <path>
               <item name="CS-Build-Week-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS-Build-Week-1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CS-Build-Week-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS-Build-Week-1" type="462c0819:PsiDirectoryNode" />
+              <item name="adv_project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CS-Build-Week-1" type="b2602c69:ProjectViewProjectNode" />
@@ -175,18 +144,17 @@
       <option name="presentableId" value="Default" />
       <updated>1578332008184</updated>
       <workItem from="1578332011842" duration="1903000" />
-      <workItem from="1578413337507" duration="2630000" />
+      <workItem from="1578413337507" duration="4285000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4506000" />
+    <option name="totallyTimeSpent" value="6161000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="780" height="870" extended-state="0" />
-    <editor active="true" />
+    <frame x="762" y="0" width="779" height="870" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32320443" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32365146" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -199,7 +167,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32928476" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32928476" />
       <window_info anchor="bottom" id="Python Console" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -303,34 +271,47 @@
     <entry file="file://$PROJECT_DIR$/adv_project/wsgi.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/adv_project/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adv_project/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/adv_project/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        <state relative-caret-position="85">
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adv_project/settings.py">
+    <entry file="file://$PROJECT_DIR$/canada_adv/apps.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/canada_adv/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/canada_adv/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        <state relative-caret-position="153">
+          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/canada_adv/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
