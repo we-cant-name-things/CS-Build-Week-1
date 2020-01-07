@@ -6,6 +6,8 @@ from rest_framework.authtoken.models import Token
 import uuid
 
 places= ('gas_station', 'hotel', 'fast_food', 'bank', 'store')
+random_geneator_pick_2 = 2 # this is nothing, its just to bypass the 'undefined-variable-name' error that was annoying me.
+
 
 locations = {
     'Florida': {
@@ -14,7 +16,7 @@ locations = {
                 'places': random_geneator_pick_2(places)   # starting
             },
             'Jacksonville': {
-                'places': random_generator_pick_2(places)  # to GA
+                'places': random_geneator_pick_2(places)  # to GA
             },
             'Tallahassee': {
                 'places': random_geneator_pick_2(places)   # to AL
@@ -28,7 +30,7 @@ locations = {
                 'places': random_geneator_pick_2(places) # starting from FL
             },
             'Atlanta': {
-                'places': random_generator_pick_2(places) # to TN
+                'places': random_geneator_pick_2(places)(places) # to TN
             },
             'Augusta':{
                 'places': random_geneator_pick_2(places) # to SC
