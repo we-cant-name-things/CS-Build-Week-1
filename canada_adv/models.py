@@ -5,6 +5,7 @@ from django.db import models
 class Player(models.Model):
     food = models.IntegerField()
     water = models.IntegerField()
+    current_location = models.CharField(max_length=30)
 
 
 class Place(models.Model):
