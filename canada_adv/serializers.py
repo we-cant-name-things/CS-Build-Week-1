@@ -1,17 +1,8 @@
 from rest_framework import serializers
-from .models import Player, Place
+from .models import Player
 
 
-class PlayerSerializer(serializers.HyperlinkedModelSerializer):
+class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
-        fields = ['id', 'food', 'water', 'email', 'current_place']
-        lookup_field = 'email'
-
-
-
-
-class PlaceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Place
-        fields = ['state', 'city', 'location', 'food_available', 'water_available']
+        fields = ['email', 'food', 'water']

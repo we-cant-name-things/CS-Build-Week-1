@@ -4,25 +4,21 @@ from django.db import models
 # Create your models here.
 
 
-class Place(models.Model):
+class Player(models.Model):
+    email = models.EmailField()
+    food = models.IntegerField()
+    water = models.IntegerField()
     state = models.CharField(max_length=30, blank=False)
     city = models.CharField(max_length=30, blank=False)
     location = models.CharField(max_length=30, blank=False)
     food_available = models.IntegerField(blank=False)
     water_available = models.IntegerField(blank=False)
+    location_2 = models.CharField(max_length=30, blank=False)
+    food_available_2 = models.IntegerField(blank=False)
+    water_available_2 = models.IntegerField(blank=False)
 
     def __str__(self):
-        return "City:" + self.city + ", location:" + self.location
-
-
-class Player(models.Model):
-    email = models.EmailField()
-    food = models.IntegerField()
-    water = models.IntegerField()
-    current_place = models.ForeignKey(Place, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return "Player email:" + self.email
+        return "Player email:" + self.email + ", Current City:" + self.city + " Current State:" + self.state
 
 
 places = ('gas_station', 'hotel', 'fast_food', 'bank', 'store')
@@ -35,12 +31,6 @@ def random_geneator_pick_2(tuple):
     random_place_2 = random.choice(tuple)
 
     return [random_place_1, random_place_2]
-
-
-
-
-
-
 
 
 locations = {
