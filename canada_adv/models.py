@@ -4,126 +4,37 @@ from django.db import models
 # Create your models here.
 
 
-class Place(models.Model):
+class Player(models.Model):
+    email = models.EmailField()
+    food = models.IntegerField()
+    water = models.IntegerField()
     state = models.CharField(max_length=30, blank=False)
     city = models.CharField(max_length=30, blank=False)
     location = models.CharField(max_length=30, blank=False)
     food_available = models.IntegerField(blank=False)
     water_available = models.IntegerField(blank=False)
+    location_2 = models.CharField(max_length=30, blank=False)
+    food_available_2 = models.IntegerField(blank=False)
+    water_available_2 = models.IntegerField(blank=False)
+
+    def __str__(self):
+        return "Player email:" + self.email + ", Current City:" + self.city + " Current State:" + self.state
 
 
-class Player(models.Model):
-    food = models.IntegerField()
-    water = models.IntegerField()
-    current_place = models.ForeignKey(Place, on_delete=models.PROTECT)
+places = ('gas_station', 'hotel', 'fast_food', 'bank', 'store')
 
+import random
+
+def random_geneator_pick_2(tuple):
+    random_place_1 = random.choice(tuple)
+    random_place_2 = random.choice(tuple)
+
+    return [random_place_1, random_place_2]
 
 places= ('gas_station', 'hotel', 'fast_food', 'bank', 'store')
-# -----------------------------------------------------------------------------------------------------------------
-# class City:
-#     def __init__(self, state, city, left, right, previous):
-#         self.state = state
-#         self.city = city
-#         self.left = left
-#         self.right = right
-#         self.previous = previous
-
-# Miami = City('Florida', 'Miami', 'Tallahassee', 'Jacksonville', None)
-# Jacksonville = City('Florida', 'Jacksonville', 'Macon', None, 'Miami')
-# Tallahassee= City('Florida','Tallahassee', 'Birmingham', None, 'Miami')
-
-# Macon = City('Georgia', 'Macon', 'Atlanta', 'Augusta', 'Jacksonville')
-# Atlanta = City('Geogia', 'Atlanta', 'Chattanooga', None, 'Macon')
-# Augusta = City('Georgia', 'Augusta', 'Columbia', None, 'Macon')
-
-# Birmingham = City('Alabama', 'Birmingham', 'Huntsville', None, 'Tallahassee')
-# Huntsville = City('Alabama', 'Huntsville', 'Selmer', None, 'Birmingham')
-
-# Chattanooga = City('Tennessee', 'Chattanooga', 'Nashville', 'Knoxville', 'Atlanta')
-# Knoxville = City('Tennessee', 'Knoxville', 'Abingdon', None, 'Chattanooga')
-# Nashville = City('Tennessee', 'Nashville', 'Bowling_Green', None, 'Chattanooga')
-# Selmer = City('Tennessee', 'Selmer', 'Memphis', None, 'Huntsville')
-# Memphis = City('Tennessee', 'Memphis', 'Springfield', None, 'Selmer')
-
-# Columbia = City('South_Carolina', 'Columbia', 'Florence', None, 'Augusta')
-# Florence = City('South_Carolina', 'Florence', 'Fayetteville', None, 'Columbia')
-
-# Fayetteville = City('North_Carolina', 'Fayetteville', 'Raleigh', None, 'Florence' )
-# Raleigh = City('North_Carolina', 'Raleigh', 'Richmond', None, 'Fayetteville')
-
-# Springfield = City('Missouri', 'Springfield', 'St_Louis', 'Kansas_City', 'Memphis')
-# St_Louis = City('Missouri', 'St_Louis', 'Champaign', None, 'Springfield')
-# Kansas_City = City('Missouri', 'Kansas_City', 'Des_Moines', None, 'Springfield')
-
-# Champaign = City('Illinois', 'Champaign', 'Chicago', None, 'St_Louis')
-# Chicago = City('Illinois', 'Chicago', 'Grand_Rapids', None, 'Champaign')
-
-# Des_Moines = City('Iowa', 'Des_Moines', 'Mason_City', None, 'Kansas_City')
-# Mason_City = City('Iowa', 'Mason_City', 'Minneapolis', None, 'Des_Moines')
-
-# Minneapolis = City('Minnesota', 'Minneapolis', 'International_Falls', None, 'Mason_City')
-# International_Falls= City('Minnesota', 'International_Falls', 'Canada_1', None, 'Minneapolis')
-
-# Bowling_Green = City('Kentucky', 'Bowling_Green', 'Louisville', 'Lexington', 'Nashville')
-# Louisville = City('Kentucky', 'Louisville', 'Indianapolis', None, 'Bowling_Green')
-# Lexington = City('Kentucky', 'Lexington', 'Cincinnati', None, 'Bowling_Green')
-
-# Indianapolis = City('Indiana', 'Indianapolis', 'Fort_Wayne', None, 'Louisville')
-# Fort_Wayne = City('Indiana', 'Fort_Wayne', 'Ann_Arbor', None, 'Indianapolis')
-
-# Richmond = City('Virginia', 'Richmond', 'Charlottesville', 'Fredericksburg', 'Raleigh')
-# Charlottesville = City('Virginia', 'Charlottesville', 'Green_Bank', None, 'Richmond')
-# Fredericksburg = City('Virginia', 'Fredericksburg', 'Baltimore', None, 'Richmond')
-# Abingdon = City('Virginia', 'Abingdon', 'Roanoke', None, 'Knoxville')
-# Roanoke = City('Virginia', 'Roanoke', 'Lewisburg', None, 'Abington')
-
-# Baltimore = City('Maryland', 'Baltimore', 'Westminster', None, 'Fredericksburg')
-# Westminster = City('Maryland', 'Westminster', 'Harrisburg', None, 'Baltimore')
-
-# Green_Bank = City('West_Virginia', 'Green_Bank', 'Bridgeport', None, 'Charlottesville')
-# Bridgeport = City('West_Virginia', 'Bridgeport', 'Pittsburgh', None, 'Green_Bank')
-# Lewisburg = City('West_Virginia', 'Lewisburg', 'Charleston', None, 'Roanoke')
-# Charleston = City('West_Virginia', 'Charleston', 'Athens', None, 'Lewisburg')
-
-# Harrisburg = City('Pennsylvania', 'Harrisburg', 'Mansfield', None, 'Westminster')
-# Mansfield = City('Pennsylvania', 'Mansfield', 'Elmira', None, 'Harrisburg' )
-# Pittsburgh = City('Pennsylvania', 'Pittsburgh', 'Clarion', None, 'Bridgeport')
-# Clarion = City('Pennsylvania', 'Clarion', 'Salamanca', None, 'Pittsburgh')
-# Erie = City('Pennsylvania', 'Erie', 'Buffalo-3', None, 'Akron')
-
-# Athens = City('Ohio', 'Athens', 'Akron', None, 'Charleston')
-# Akron = City('Ohio', 'Akron', 'Erie', None, 'Athens')
-# Cincinnati = City('Ohio', 'Cincinnati', 'Toledo', None, 'Lexington')
-# Toledo = City('Ohio', 'Toledo', 'Detroit_2', None, 'Cincinnati')
-
-# Grand_Rapids = City('Michigan', 'Grand_Rapids', 'Port_Huron', None, 'Chicago')
-# Port_Huron = City('Michigan', 'Port_Huron', 'Canada_2', None, 'Grand_Rapids')
-# Ann_Arbor = City('Michigan', 'Ann_Arbor', 'Detroit', None, 'Fort_Wayne')
-# Detroit = City('Michigan', 'Detroit', 'Canada', None, 'Ann_Arbor')
-# Detroit_2 = City('Michigan', 'Detroit_2', 'Canada_3', None, 'Toledo')
-
-# Elmira = City('New_York', 'Elmira', 'Buffalo', None, 'Mansfield')
-# Salamanca = City('New_York', 'Salamanca', 'Buffalo_2', None, 'Clarion')
-# Buffalo = City('New_York', 'Buffalo', 'Canada_4', None, 'Elmira')
-# Buffalo_2 = City('New_York', 'Buffalo_2', 'Canada_5', None, 'Salamanca')
-# Buffalo_3 = City('New_York', 'Buffalo_3', 'Canada_6', None, 'Erie')
-
-# Canada = City('Canada', 'Canada', None, None, 'Detroit')
-# Canada_1 = City('Canada', 'Canada', None, None, 'International_Falls')
-# Canada_2= City('Canada', 'Canada', None, None, 'Port_Huron')
-# Canada_3 = City('Canada', 'Canada_3', None, None, 'Detroit_2')
-# Canada_4 = City('Canada', 'Canada', None, None, 'Buffalo')
-# Canada_5 = City('Canada', 'Canada', None, None, 'Buffalo_2')
-# Canada_6 = City('Canada', 'Canada', None, None, 'Buffalo_3')
 
 
 
-
-
-
-# -----------------------------------------------------------------------------------------------------------------
-
-# -----------------------------------------------------------------------------------------------------------------
 class City:
     def __init__(self, state, city):
         self.state = state
@@ -131,6 +42,8 @@ class City:
         self.left = None
         self.right = None
         self.previous = None
+        
+        
 class Map:
     def __init__(self):
         self.start = City("Florida", "Miami")
@@ -242,6 +155,107 @@ map.insert_left_at('Athens', 'Ohio', 'Akron')
 map.insert_left_at('Akron', 'Pennsylvania', 'Erie')
 map.insert_left_at('Erie', 'New_York', 'Buffalo-3')
 map.insert_left_at('Buffalo-3', 'Canada', 'Canada_6')
+
+
+# -----------------------------------------------------------------------------------------------------------------
+
+
+# class City:
+#     def __init__(self, state, city, left, right, previous):
+#         self.state = state
+#         self.city = city
+#         self.left = left
+#         self.right = right
+#         self.previous = previous
+
+# Miami = City('Florida', 'Miami', 'Tallahassee', 'Jacksonville', None)
+# Jacksonville = City('Florida', 'Jacksonville', 'Macon', None, 'Miami')
+# Tallahassee= City('Florida','Tallahassee', 'Birmingham', None, 'Miami')
+
+# Macon = City('Georgia', 'Macon', 'Atlanta', 'Augusta', 'Jacksonville')
+# Atlanta = City('Geogia', 'Atlanta', 'Chattanooga', None, 'Macon')
+# Augusta = City('Georgia', 'Augusta', 'Columbia', None, 'Macon')
+
+# Birmingham = City('Alabama', 'Birmingham', 'Huntsville', None, 'Tallahassee')
+# Huntsville = City('Alabama', 'Huntsville', 'Selmer', None, 'Birmingham')
+
+# Chattanooga = City('Tennessee', 'Chattanooga', 'Nashville', 'Knoxville', 'Atlanta')
+# Knoxville = City('Tennessee', 'Knoxville', 'Abingdon', None, 'Chattanooga')
+# Nashville = City('Tennessee', 'Nashville', 'Bowling_Green', None, 'Chattanooga')
+# Selmer = City('Tennessee', 'Selmer', 'Memphis', None, 'Huntsville')
+# Memphis = City('Tennessee', 'Memphis', 'Springfield', None, 'Selmer')
+
+# Columbia = City('South_Carolina', 'Columbia', 'Florence', None, 'Augusta')
+# Florence = City('South_Carolina', 'Florence', 'Fayetteville', None, 'Columbia')
+
+# Fayetteville = City('North_Carolina', 'Fayetteville', 'Raleigh', None, 'Florence' )
+# Raleigh = City('North_Carolina', 'Raleigh', 'Richmond', None, 'Fayetteville')
+
+# Springfield = City('Missouri', 'Springfield', 'St_Louis', 'Kansas_City', 'Memphis')
+# St_Louis = City('Missouri', 'St_Louis', 'Champaign', None, 'Springfield')
+# Kansas_City = City('Missouri', 'Kansas_City', 'Des_Moines', None, 'Springfield')
+
+# Champaign = City('Illinois', 'Champaign', 'Chicago', None, 'St_Louis')
+# Chicago = City('Illinois', 'Chicago', 'Grand_Rapids', None, 'Champaign')
+
+# Des_Moines = City('Iowa', 'Des_Moines', 'Mason_City', None, 'Kansas_City')
+# Mason_City = City('Iowa', 'Mason_City', 'Minneapolis', None, 'Des_Moines')
+
+# Minneapolis = City('Minnesota', 'Minneapolis', 'International_Falls', None, 'Mason_City')
+# International_Falls= City('Minnesota', 'International_Falls', 'Canada_1', None, 'Minneapolis')
+
+# Bowling_Green = City('Kentucky', 'Bowling_Green', 'Louisville', 'Lexington', 'Nashville')
+# Louisville = City('Kentucky', 'Louisville', 'Indianapolis', None, 'Bowling_Green')
+# Lexington = City('Kentucky', 'Lexington', 'Cincinnati', None, 'Bowling_Green')
+
+# Indianapolis = City('Indiana', 'Indianapolis', 'Fort_Wayne', None, 'Louisville')
+# Fort_Wayne = City('Indiana', 'Fort_Wayne', 'Ann_Arbor', None, 'Indianapolis')
+
+# Richmond = City('Virginia', 'Richmond', 'Charlottesville', 'Fredericksburg', 'Raleigh')
+# Charlottesville = City('Virginia', 'Charlottesville', 'Green_Bank', None, 'Richmond')
+# Fredericksburg = City('Virginia', 'Fredericksburg', 'Baltimore', None, 'Richmond')
+# Abingdon = City('Virginia', 'Abingdon', 'Roanoke', None, 'Knoxville')
+# Roanoke = City('Virginia', 'Roanoke', 'Lewisburg', None, 'Abington')
+
+# Baltimore = City('Maryland', 'Baltimore', 'Westminster', None, 'Fredericksburg')
+# Westminster = City('Maryland', 'Westminster', 'Harrisburg', None, 'Baltimore')
+
+# Green_Bank = City('West_Virginia', 'Green_Bank', 'Bridgeport', None, 'Charlottesville')
+# Bridgeport = City('West_Virginia', 'Bridgeport', 'Pittsburgh', None, 'Green_Bank')
+# Lewisburg = City('West_Virginia', 'Lewisburg', 'Charleston', None, 'Roanoke')
+# Charleston = City('West_Virginia', 'Charleston', 'Athens', None, 'Lewisburg')
+
+# Harrisburg = City('Pennsylvania', 'Harrisburg', 'Mansfield', None, 'Westminster')
+# Mansfield = City('Pennsylvania', 'Mansfield', 'Elmira', None, 'Harrisburg' )
+# Pittsburgh = City('Pennsylvania', 'Pittsburgh', 'Clarion', None, 'Bridgeport')
+# Clarion = City('Pennsylvania', 'Clarion', 'Salamanca', None, 'Pittsburgh')
+# Erie = City('Pennsylvania', 'Erie', 'Buffalo-3', None, 'Akron')
+
+# Athens = City('Ohio', 'Athens', 'Akron', None, 'Charleston')
+# Akron = City('Ohio', 'Akron', 'Erie', None, 'Athens')
+# Cincinnati = City('Ohio', 'Cincinnati', 'Toledo', None, 'Lexington')
+# Toledo = City('Ohio', 'Toledo', 'Detroit_2', None, 'Cincinnati')
+
+# Grand_Rapids = City('Michigan', 'Grand_Rapids', 'Port_Huron', None, 'Chicago')
+# Port_Huron = City('Michigan', 'Port_Huron', 'Canada_2', None, 'Grand_Rapids')
+# Ann_Arbor = City('Michigan', 'Ann_Arbor', 'Detroit', None, 'Fort_Wayne')
+# Detroit = City('Michigan', 'Detroit', 'Canada', None, 'Ann_Arbor')
+# Detroit_2 = City('Michigan', 'Detroit_2', 'Canada_3', None, 'Toledo')
+
+# Elmira = City('New_York', 'Elmira', 'Buffalo', None, 'Mansfield')
+# Salamanca = City('New_York', 'Salamanca', 'Buffalo_2', None, 'Clarion')
+# Buffalo = City('New_York', 'Buffalo', 'Canada_4', None, 'Elmira')
+# Buffalo_2 = City('New_York', 'Buffalo_2', 'Canada_5', None, 'Salamanca')
+# Buffalo_3 = City('New_York', 'Buffalo_3', 'Canada_6', None, 'Erie')
+
+# Canada = City('Canada', 'Canada', None, None, 'Detroit')
+# Canada_1 = City('Canada', 'Canada', None, None, 'International_Falls')
+# Canada_2= City('Canada', 'Canada', None, None, 'Port_Huron')
+# Canada_3 = City('Canada', 'Canada_3', None, None, 'Detroit_2')
+# Canada_4 = City('Canada', 'Canada', None, None, 'Buffalo')
+# Canada_5 = City('Canada', 'Canada', None, None, 'Buffalo_2')
+# Canada_6 = City('Canada', 'Canada', None, None, 'Buffalo_3')
+
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -536,3 +550,4 @@ map.insert_left_at('Buffalo-3', 'Canada', 'Canada_6')
     #     }
     # }
 # }
+
