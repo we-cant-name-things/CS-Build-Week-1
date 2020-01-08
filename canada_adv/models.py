@@ -19,296 +19,445 @@ class Player(models.Model):
 
 
 places= ('gas_station', 'hotel', 'fast_food', 'bank', 'store')
-random_geneator_pick_2 = 2 # this is nothing, its just to bypass the 'undefined-variable-name' error that was annoying me.
+# -----------------------------------------------------------------------------------------------------------------
+class City:
+    def __init__(self, state, city, left, right, previous):
+        self.state = state
+        self.city = city
+        self.left = left
+        self.right = right
+        self.previous = previous
+
+Miami = City('Florida', 'Miami', 'Tallahassee', 'Jacksonville', None)
+Jacksonville = City('Florida', 'Jacksonville', 'Macon', None, 'Miami')
+Tallahassee= City('Florida','Tallahassee', 'Birmingham', None, 'Miami')
+
+Macon = City('Georgia', 'Macon', 'Atlanta', 'Augusta', 'Jacksonville')
+Atlanta = City('Geogia', 'Atlanta', 'Chattanooga', None, 'Macon')
+Augusta = City('Georgia', 'Augusta', 'Columbia', None, 'Macon')
+
+Birmingham = City('Alabama', 'Birmingham', 'Huntsville', None, 'Tallahassee')
+Huntsville = City('Alabama', 'Huntsville', 'Selmer', None, 'Birmingham')
+
+Chattanooga = City('Tennessee', 'Chattanooga', 'Nashville', 'Knoxville', 'Atlanta')
+Knoxville = City('Tennessee', 'Knoxville', 'Abingdon', None, 'Chattanooga')
+Nashville = City('Tennessee', 'Nashville', 'Bowling_Green', None, 'Chattanooga')
+Selmer = City('Tennessee', 'Selmer', 'Memphis', None, 'Huntsville')
+Memphis = City('Tennessee', 'Memphis', 'Springfield', None, 'Selmer')
+
+Columbia = City('South_Carolina', 'Columbia', 'Florence', None, 'Augusta')
+Florence = City('South_Carolina', 'Florence', 'Fayetteville', None, 'Columbia')
+
+Fayetteville = City('North_Carolina', 'Fayetteville', 'Raleigh', None, 'Florence' )
+Raleigh = City('North_Carolina', 'Raleigh', 'Richmond', None, 'Fayetteville')
+
+Springfield = City('Missouri', 'Springfield', 'St_Louis', 'Kansas_City', 'Memphis')
+St_Louis = City('Missouri', 'St_Louis', 'Champaign', None, 'Springfield')
+Kansas_City = City('Missouri', 'Kansas_City', 'Des_Moines', None, 'Springfield')
+
+Champaign = City('Illinois', 'Champaign', 'Chicago', None, 'St_Louis')
+Chicago = City('Illinois', 'Chicago', 'Grand_Rapids', None, 'Champaign')
+
+Des_Moines = City('Iowa', 'Des_Moines', 'Mason_City', None, 'Kansas_City')
+Mason_City = City('Iowa', 'Mason_City', 'Minneapolis', None, 'Des_Moines')
+
+Minneapolis = City('Minnesota', 'Minneapolis', 'International_Falls', None, 'Mason_City')
+International_Falls= City('Minnesota', 'International_Falls', 'Canada_1', None, 'Minneapolis')
+
+Bowling_Green = City('Kentucky', 'Bowling_Green', 'Louisville', 'Lexington', 'Nashville')
+Louisville = City('Kentucky', 'Louisville', 'Indianapolis', None, 'Bowling_Green')
+Lexington = City('Kentucky', 'Lexington', 'Cincinnati', None, 'Bowling_Green')
+
+Indianapolis = City('Indiana', 'Indianapolis', 'Fort_Wayne', None, 'Louisville')
+Fort_Wayne = City('Indiana', 'Fort_Wayne', 'Ann_Arbor', None, 'Indianapolis')
+
+Richmond = City('Virginia', 'Richmond', 'Charlottesville', 'Fredericksburg', 'Raleigh')
+Charlottesville = City('Virginia', 'Charlottesville', 'Green_Bank', None, 'Richmond')
+Fredericksburg = City('Virginia', 'Fredericksburg', 'Baltimore', None, 'Richmond')
+Abingdon = City('Virginia', 'Abingdon', 'Roanoke', None, 'Knoxville')
+Roanoke = City('Virginia', 'Roanoke', 'Lewisburg', None, 'Abington')
+
+Baltimore = City('Maryland', 'Baltimore', 'Westminster', None, 'Fredericksburg')
+Westminster = City('Maryland', 'Westminster', 'Harrisburg', None, 'Baltimore')
+
+Green_Bank = City('West_Virginia', 'Green_Bank', 'Bridgeport', None, 'Charlottesville')
+Bridgeport = City('West_Virginia', 'Bridgeport', 'Pittsburgh', None, 'Green_Bank')
+Lewisburg = City('West_Virginia', 'Lewisburg', 'Charleston', None, 'Roanoke')
+Charleston = City('West_Virginia', 'Charleston', 'Athens', None, 'Lewisburg')
+
+Harrisburg = City('Pennsylvania', 'Harrisburg', 'Mansfield', None, 'Westminster')
+Mansfield = City('Pennsylvania', 'Mansfield', 'Elmira', None, 'Harrisburg' )
+Pittsburgh = City('Pennsylvania', 'Pittsburgh', 'Clarion', None, 'Bridgeport')
+Clarion = City('Pennsylvania', 'Clarion', 'Salamanca', None, 'Pittsburgh')
+Erie = City('Pennsylvania', 'Erie', 'Buffalo-3', None, 'Akron')
+
+Athens = City('Ohio', 'Athens', 'Akron', None, 'Charleston')
+Akron = City('Ohio', 'Akron', 'Erie', None, 'Athens')
+Cincinnati = City('Ohio', 'Cincinnati', 'Toledo', None, 'Lexington')
+Toledo = City('Ohio', 'Toledo', 'Detroit_2', None, 'Cincinnati')
+
+Grand_Rapids = City('Michigan', 'Grand_Rapids', 'Port_Huron', None, 'Chicago')
+Port_Huron = City('Michigan', 'Port_Huron', 'Canada_2', None, 'Grand_Rapids')
+Ann_Arbor = City('Michigan', 'Ann_Arbor', 'Detroit', None, 'Fort_Wayne')
+Detroit = City('Michigan', 'Detroit', 'Canada', None, 'Ann_Arbor')
+Detroit_2 = City('Michigan', 'Detroit_2', 'Canada_3', None, 'Toledo')
+
+Elmira = City('New_York', 'Elmira', 'Buffalo', None, 'Mansfield')
+Salamanca = City('New_York', 'Salamanca', '', None, 'Clarion')
+Buffalo = City('New_York', 'Buffalo', 'Canada_4', None, 'Elmira')
+Buffalo_2 = City('New_York', 'Buffalo_2', 'Canada_5', None, 'Salamanca')
+Buffalo_3 = City('New_York', 'Buffalo_3', 'Canada_6', None, 'Erie')
+
+Canada = City('Canada', 'Canada', None, None, 'Detroit')
+Canada_1 = City('Canada', 'Canada', None, None, 'International_Falls')
+Canada_2= City('Canada', 'Canada', None, None, 'Port_Huron')
+Canada_3 = City('Canada', 'Canada_3', None, None, 'Detroit_2')
+Canada_4 = City('Canada', 'Canada', None, None, 'Buffalo')
+Canada_5 = City('Canada', 'Canada', None, None, 'Buffalo_2')
+Canada_6 = City('Canada', 'Canada', None, None, 'Buffalo_3')
 
 
-locations = {
-    'Florida': {
-        'cities': {
-            'Miami': {
-                'places': random_geneator_pick_2(places)   # starting
-            },
-            'Jacksonville': {
-                'places': random_geneator_pick_2(places)  # to GA
-            },
-            'Tallahassee': {
-                'places': random_geneator_pick_2(places)   # to AL
-            },
-        }
-    },
+
+
+
+
+# -----------------------------------------------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------------------------------------------
+# class City:
+#     def __init__(self, state, city):
+#         self.state = state
+#         self.city = city
+#         self.left = None
+#         self.right = None
+#         self.previous = None
+
+# class Map:
+#     def __init__(self):
+#         self.start = City("Florida", "Miami")
+
+#     def search_map(self, City):
+#       data = []
+#       queue = []
+#       queue.append(self.start)
+#       while len(queue) != 0:
+#         city_viewed = queue.pop(0)
+#         data.append(city_viewed.city)
+#         if city_viewed.city == City.city:
+#           return city_viewed
+#         if city_viewed.left:
+#           queue.append(city_viewed.left)
+#         if city_viewed.right: queue.append(city_viewed.right)
+#       return -1
+
+#     def insert_left_at(self, City, new_city):
+#         current_city = self.search_map(City)
+#         if current_city != -1:
+#           current_city.left = new_city
+#           new_city.previous = current_city
+#         else: return "City not found"
+
+#     def insert_right_at(self, City, new_city):
+#         current_city = self.search_map(City)
+#         if current_city != -1:
+#           current_city.right = new_city
+#           new_city.previous = current_city
+#         else: return "City not found"
+
+# map = Map()
+# map.insert_left_at(City("Florida", "Miami"), City("Florida", "Jacksonville"))
+# map.insert_right_at(City("Florida","Miami"), City("Florida", "Tallahassee"))
+# map.insert_left_at(City("Florida", "Jacksonville"), City("Georgia", "Atlanta"))
+
+# -------------------------------------------------------------------------------------------------------------------
+# locations = {
+    # 'Florida': {
+    #     'cities': {
+    #         'Miami': {
+    #             'left':'Jacksonville',
+    #             'right':'Tallahassee',
+    #             'previous': None
+    #         },
+    #         'Jacksonville': {
+    #             'left': 'Macon',  # to GA
+    #             'right': None,
+    #             'previous': 'Miami'
+    #         },
+    #         'Tallahassee': {
+    #             'left':'Birmingham',  # to AL
+    #             'right': None,
+    #             'previous': 'Miami'
+    #         },
+    #     }
+    # },
     
-    'Georgia': {
-        'cities': {
-            'Macon': {
-                'places': random_geneator_pick_2(places) # starting from FL
-            },
-            'Atlanta': {
-                'places': random_geneator_pick_2(places)(places) # to TN
-            },
-            'Augusta':{
-                'places': random_geneator_pick_2(places) # to SC
-            },
+    # 'Georgia': {
+    #     'cities': {
+    #         'Macon': {
+    #             'places': random_geneator_pick_2(places) # starting from FL
+    #         },
+    #         'Atlanta': {
+    #             'places': random_geneator_pick_2(places)(places) # to TN
+    #         },
+    #         'Augusta':{
+    #             'places': random_geneator_pick_2(places) # to SC
+    #         },
 
-        }
-    },
+    #     }
+    # },
 
-    'Alabama':{
-        'cities':{
-            'Birmingham': {
-                'places': random_geneator_pick_2(places) # starting from FL
-            },
-            'Huntsville': {
-                'places': random_geneator_pick_2(places) # to TN
-            }
-        }
-    },
+    # 'Alabama':{
+    #     'cities':{
+    #         'Birmingham': {
+    #             'places': random_geneator_pick_2(places) # starting from FL
+    #         },
+    #         'Huntsville': {
+    #             'places': random_geneator_pick_2(places) # to TN
+    #         }
+    #     }
+    # },
 
-    'Tennessee':{
-        'cities':{
-            'Chattanooga':{
-                'places': random_geneator_pick_2(places) # starting from GA
-            },
-            'Knoxville':{
-                'places': random_geneator_pick_2(places) # to VA
-            },
-            'Nashville':{
-                'places': random_geneator_pick_2(places) # to KY
-            },
-            'Selmer':{
-                'places': random_geneator_pick_2(places) # starting from AL
-            },
-            'Memphis':{
-                'places': random_geneator_pick_2(places) # to Missouri
-            }
-        }
-    },
+    # 'Tennessee':{
+    #     'cities':{
+    #         'Chattanooga':{
+    #             'places': random_geneator_pick_2(places) # starting from GA
+    #         },
+    #         'Knoxville':{
+    #             'places': random_geneator_pick_2(places) # to VA
+    #         },
+    #         'Nashville':{
+    #             'places': random_geneator_pick_2(places) # to KY
+    #         },
+    #         'Selmer':{
+    #             'places': random_geneator_pick_2(places) # starting from AL
+    #         },
+    #         'Memphis':{
+    #             'places': random_geneator_pick_2(places) # to Missouri
+    #         }
+    #     }
+    # },
 
-    'South_Carolina':{
-        'cities':{
-            'Columbia':{
-                'places': random_geneator_pick_2(places) # starting from GA
-            },
-            'Florence':{
-                'places': random_geneator_pick_2(places) # to NC
-            }
-        },
-    },
+    # 'South_Carolina':{
+    #     'cities':{
+    #         'Columbia':{
+    #             'places': random_geneator_pick_2(places) # starting from GA
+    #         },
+    #         'Florence':{
+    #             'places': random_geneator_pick_2(places) # to NC
+    #         }
+    #     },
+    # },
 
-    'North_Carolina':{
-        'cities':{
-            'Fayetteville':{
-                 'places': random_geneator_pick_2(places) # starting from SC
-            },
-            'Raleigh':{
-                'places': random_geneator_pick_2(places) # to VA
-            }
-        }
-    },
+    # 'North_Carolina':{
+    #     'cities':{
+    #         'Fayetteville':{
+    #              'places': random_geneator_pick_2(places) # starting from SC
+    #         },
+    #         'Raleigh':{
+    #             'places': random_geneator_pick_2(places) # to VA
+    #         }
+    #     }
+    # },
 
 
-    'Missouri':{
-        'cities':{
-            'Springfield':{
-                'places': random_geneator_pick_2(places)# starting from TN
-            },
-            'St_Louis':{
-                'places': random_geneator_pick_2(places)# to Illinois
-            },
-            'Kansas City':{
-                'places': random_geneator_pick_2(places)# to Iowa
-            }
-        }
-    },
+    # 'Missouri':{
+    #     'cities':{
+    #         'Springfield':{
+    #             'places': random_geneator_pick_2(places)# starting from TN
+    #         },
+    #         'St_Louis':{
+    #             'places': random_geneator_pick_2(places)# to Illinois
+    #         },
+    #         'Kansas_City':{
+    #             'places': random_geneator_pick_2(places)# to Iowa
+    #         }
+    #     }
+    # },
 
-    'Illinois':{
-        'cities':{
-            'Champaign':{
-                'places': random_geneator_pick_2(places)# from Missouri
-            },
-            'Chicago':{
-                'places': random_geneator_pick_2(places)# to MI
-            }
+    # 'Illinois':{
+    #     'cities':{
+    #         'Champaign':{
+    #             'places': random_geneator_pick_2(places)# from Missouri
+    #         },
+    #         'Chicago':{
+    #             'places': random_geneator_pick_2(places)# to MI
+    #         }
             
-        }
-    },
+    #     }
+    # },
 
-    'Iowa':{
-        'cities':{
-            'Des Moines':{
-                'places': random_geneator_pick_2(places) # from Missouri
-            },
-            'Mason_City':{
-                'places': random_geneator_pick_2(places) # to Minnesota
-            }
+    # 'Iowa':{
+    #     'cities':{
+    #         'Des_Moines':{
+    #             'places': random_geneator_pick_2(places) # from Missouri
+    #         },
+    #         'Mason_City':{
+    #             'places': random_geneator_pick_2(places) # to Minnesota
+    #         }
 
-        }
-    },
+    #     }
+    # },
 
-    'Minnesota':{
-        'cities':{
-            'Minneapolis':{
-                'places': random_geneator_pick_2(places) # from Iowa
-            },
-            'International_Falls':{
-                'places': random_geneator_pick_2(places) # to Canada 
-            }
-        }
-    },
+    # 'Minnesota':{
+    #     'cities':{
+    #         'Minneapolis':{
+    #             'places': random_geneator_pick_2(places) # from Iowa
+    #         },
+    #         'International_Falls':{
+    #             'places': random_geneator_pick_2(places) # to Canada 
+    #         }
+    #     }
+    # },
 
-    'Michigan':{
-        'cities':{
-            'Detroit':{
-                'places': random_geneator_pick_2(places)# from XXXX to Canada
-            },
-            'Grand_Rapids':{
-                'places': random_geneator_pick_2(places)# from Chicago
-            },
-            'Port Huron':{
-                'places': random_geneator_pick_2(places)# from Grand_Rapid to Canada
-            },
-            'Ann_Arbor':{
-                'places': random_geneator_pick_2(places) # from Indiana
-            },
-            'Detroit-2':{
-                'places': random_geneator_pick_2(places) #from Ann_Arbor to Canada
-            },
-            'Detroit-3':{
-                'places': random_geneator_pick_2(places) # from Ohio to Canada
-            }
-        }
-    },
+    # 'Michigan':{
+    #     'cities':{
+    #         'Grand_Rapids':{
+    #             'places': random_geneator_pick_2(places)# from Chicago
+    #         },
+    #         'Port_Huron':{
+    #             'places': random_geneator_pick_2(places)# from Grand_Rapid to Canada
+    #         },
+    #         'Ann_Arbor':{
+    #             'places': random_geneator_pick_2(places) # from Indiana
+    #         },
+    #         'Detroit':{
+    #             'places': random_geneator_pick_2(places) #from Ann_Arbor to Canada
+    #         },
+    #         'Detroit-2':{
+    #             'places': random_geneator_pick_2(places) # from Ohio to Canada
+    #         }
+    #     }
+    # },
 
-    'Kentucky':{
-        'cities':{
-            'Bowling_Green':{
-                'places': random_geneator_pick_2(places) #from TN
-            },
-            'Lexington':{
-                'places': random_geneator_pick_2(places) #to Ohio
-            },
-            'Louisville':{
-                'places': random_geneator_pick_2(places) # to Indiana
-            }
-        }
-    },
+    # 'Kentucky':{
+    #     'cities':{
+    #         'Bowling_Green':{
+    #             'places': random_geneator_pick_2(places) #from TN
+    #         },
+    #         'Lexington':{
+    #             'places': random_geneator_pick_2(places) #to Ohio
+    #         },
+    #         'Louisville':{
+    #             'places': random_geneator_pick_2(places) # to Indiana
+    #         }
+    #     }
+    # },
 
-    'Indiana':{
-        'cities':{
-            'Indianapolis':{
-                'places': random_geneator_pick_2(places) #from KY
-            },
-            'Fort Wayne':{
-                'places': random_geneator_pick_2(places) #to MI
-            }
-        }
-    },
+    # 'Indiana':{
+    #     'cities':{
+    #         'Indianapolis':{
+    #             'places': random_geneator_pick_2(places) #from KY
+    #         },
+    #         'Fort_Wayne':{
+    #             'places': random_geneator_pick_2(places) #to MI
+    #         }
+    #     }
+    # },
 
-    'Virginia':{
-        'cities':{
-            'Richmond':{
-                'places': random_geneator_pick_2(places) # starting from NC
-            },
-            'Fredericksburg':{
-                'places': random_geneator_pick_2(places) # to MD
-            },
-            'Charlottesville':{
-                'places': random_geneator_pick_2(places) # to WV-1
-            },
-            'Abingdon':{
-                'places': random_geneator_pick_2(places) # starting from TN
-            },
-            'Roanoke':{
-                'places': random_geneator_pick_2(places) # to WV-2
-            }
+    # 'Virginia':{
+    #     'cities':{
+    #         'Richmond':{
+    #             'places': random_geneator_pick_2(places) # starting from NC
+    #         },
+    #         'Fredericksburg':{
+    #             'places': random_geneator_pick_2(places) # to MD
+    #         },
+    #         'Charlottesville':{
+    #             'places': random_geneator_pick_2(places) # to WV-1
+    #         },
+    #         'Abingdon':{
+    #             'places': random_geneator_pick_2(places) # starting from TN
+    #         },
+    #         'Roanoke':{
+    #             'places': random_geneator_pick_2(places) # to WV-2
+    #         }
             
-        }
-    },
+    #     }
+    # },
 
 
-    'Maryland':{
-        'cities':{
-            'Baltimore':{
-                'places': random_geneator_pick_2(places) #starting from VA
-            },
-            'Westminster':{
-                'places': random_geneator_pick_2(places) #to PA-1
-            }
-        }
-    },
+    # 'Maryland':{
+    #     'cities':{
+    #         'Baltimore':{
+    #             'places': random_geneator_pick_2(places) #starting from VA
+    #         },
+    #         'Westminster':{
+    #             'places': random_geneator_pick_2(places) #to PA-1
+    #         }
+    #     }
+    # },
 
-    'West_Virginia':{
-        'cities':{
-            'Green_Bank':{
-                'places': random_geneator_pick_2(places) #starting from VA-1
-            },
-            'Bridgeport':{
-                'places': random_geneator_pick_2(places) # to PA-2
-            },
-            'Lewisburg':{
-                'places': random_geneator_pick_2(places) #starting from VA-2
-            },
-            'Charleston':{
-                'places': random_geneator_pick_2(places) #to OH-1
-            }
-        }
-    },
+    # 'West_Virginia':{
+    #     'cities':{
+    #         'Green_Bank':{
+    #             'places': random_geneator_pick_2(places) #starting from VA-1
+    #         },
+    #         'Bridgeport':{
+    #             'places': random_geneator_pick_2(places) # to PA-2
+    #         },
+    #         'Lewisburg':{
+    #             'places': random_geneator_pick_2(places) #starting from VA-2
+    #         },
+    #         'Charleston':{
+    #             'places': random_geneator_pick_2(places) #to OH-1
+    #         }
+    #     }
+    # },
 
-    'Pennsylvania':{
-        'cities':{
-            'Harrisburg':{
-                'places': random_geneator_pick_2(places)# starting from Maryland
-            },
-            'Mansfield':{
-                'places': random_geneator_pick_2(places)# from Harrisburg to NY-1
-            },
-            'Pittsburgh':{
-                'places': random_geneator_pick_2(places)# starting from WV
-            },
-            'Clarion':{
-                'places': random_geneator_pick_2(places)# from pittsburg to NY-2
-            },
-            'Erie':{
-                'places': random_geneator_pick_2(places) #from OH to NY-3
-            }
-        }
-    },
+    # 'Pennsylvania':{
+    #     'cities':{
+    #         'Harrisburg':{
+    #             'places': random_geneator_pick_2(places)# starting from Maryland
+    #         },
+    #         'Mansfield':{
+    #             'places': random_geneator_pick_2(places)# from Harrisburg to NY-1
+    #         },
+    #         'Pittsburgh':{
+    #             'places': random_geneator_pick_2(places)# starting from WV
+    #         },
+    #         'Clarion':{
+    #             'places': random_geneator_pick_2(places)# from pittsburg to NY-2
+    #         },
+            # 'Erie':{
+            #     'places': random_geneator_pick_2(places) #from OH to NY-3
+            # }
+    #     }
+    # },
 
-    'New_York':{
-        'cities':{
-            'Elmira':{
-                'places': random_geneator_pick_2(places) #from PA-Mansfield
-            },
-            'Salamanca':{
-                'places': random_geneator_pick_2(places) #from PA-Clarion
-            },
-            'Buffalo-1':{
-                'places': random_geneator_pick_2(places) #from Elmira to Canada **
-            },
-            'Buffalo-2':{
-                'places': random_geneator_pick_2(places) #from Salamanca to Canada **
-            },
-            'Buffalo-3':{
-                'places': random_geneator_pick_2(places) # from PA-Erie
-            }       
-        }
-    },
+    # 'New_York':{
+    #     'cities':{
+    #         'Elmira':{
+    #             'places': random_geneator_pick_2(places) #from PA-Mansfield
+    #         },
+    #         'Salamanca':{
+    #             'places': random_geneator_pick_2(places) #from PA-Clarion
+    #         },
+    #         'Buffalo':{
+    #             'places': random_geneator_pick_2(places) #from Elmira to Canada **
+    #         },
+    #         'Buffalo_2':{
+    #             'places': random_geneator_pick_2(places) #from Salamanca to Canada **
+    #         },
+    #         'Buffalo_3':{
+    #             'places': random_geneator_pick_2(places) # from PA-Erie
+    #         }       
+    #     }
+    # },
 
-    'Ohio':{
-        'cities':{
-            'Athens':{
-                'places': random_geneator_pick_2(places) # starting from WV
-            },
-            'Akron':{
-                'places': random_geneator_pick_2(places) # from Athens to PA
-            },
-            'Cincinnati':{
-                'places': random_geneator_pick_2(places) # starting from KY
-            },
-            'Toledo':{
-                'places': random_geneator_pick_2(places) # from Cincinnati to MI
-            }
-        }
-    }
-
-    
-}
+    # 'Ohio':{
+    #     'cities':{
+    #         'Athens':{
+    #             'places': random_geneator_pick_2(places) # starting from WV
+    #         },
+    #         'Akron':{
+    #             'places': random_geneator_pick_2(places) # from Athens to PA
+    #         },
+    #         'Cincinnati':{
+    #             'places': random_geneator_pick_2(places) # starting from KY
+    #         },
+    #         'Toledo':{
+    #             'places': random_geneator_pick_2(places) # from Cincinnati to MI
+    #         }
+    #     }
+    # }
+# }
