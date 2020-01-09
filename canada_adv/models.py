@@ -34,7 +34,6 @@ def random_geneator_pick_2(tuple):
 places= ('gas_station', 'hotel', 'fast_food', 'bank', 'store')
 
 
-
 class City:
     def __init__(self, state, city):
         self.state = state
@@ -42,57 +41,70 @@ class City:
         self.left = None
         self.right = None
         self.previous = None
-        
-        
+
+
 class Map:
     def __init__(self):
         self.start = City("Florida", "Miami")
+
     def search_map(self, city_name):
-      data = []
-      queue = []
-      queue.append(self.start)
-      while len(queue) != 0:
-        city_viewed = queue.pop(0)
-        data.append(city_viewed.city)
-        if city_viewed.city == city_name:
-          return city_viewed
-        if city_viewed.left:
-          queue.append(city_viewed.left)
-        if city_viewed.right: queue.append(city_viewed.right)
-      return -1
+        data = []
+        queue = []
+        queue.append(self.start)
+        while len(queue) != 0:
+            city_viewed = queue.pop(0)
+            data.append(city_viewed.city)
+            if city_viewed.city == city_name:
+                return city_viewed
+            if city_viewed.left:
+                queue.append(city_viewed.left)
+            if city_viewed.right: queue.append(city_viewed.right)
+        return -1
+
     def insert_left_at(self, current_city, new_state, new_city):
         current_city = self.search_map(current_city)
-        new_city = City(new_state, new_city)
-        if current_city != -1:
-          if current_city.left: return "this city already has a left"
-          else: current_city.left = new_city
-          new_city.previous = current_city
-        else: return "City not found"
+        if current_city == -1:
+            return "City not Found"
+        elif current_city != -1:
+            if current_city.left:
+                return "this city already has a left"
+            else:
+                new_city = City(new_state, new_city)
+                current_city.left = new_city
+                new_city.previous = current_city
+                return "Success!"
+
     def insert_right_at(self, current_city, new_state, new_city):
         current_city = self.search_map(current_city)
-        new_city = City(new_state, new_city)
-        if current_city != -1:
-          if current_city.right: return "this city already has a right"
-          else: current_city.right = new_city
-          new_city.previous = current_city
-        else: return "City not found"
+        if current_city == -1:
+            return "City not Found"
+        elif current_city != -1:
+            if current_city.right:
+                return "this city already has a right"
+            else:
+                new_city = City(new_state, new_city)
+
+                current_city.right = new_city
+                new_city.previous = current_city
+                return "Success!"
+
 
 map = Map()
-                # where u at,   where you going: state, city.
+# where u at,   where you going: state, city.
 map.insert_left_at("Miami", "Florida", "Jacksonville")
 map.insert_right_at("Miami", 'Florida', 'Tallahassee')
 
-map.insert_left_at("Jacksonville","Georgia", "Macon")
+map.insert_left_at("Jacksonville", "Georgia", "Macon")
 map.insert_left_at("Macon", "Georgia", "Atlanta")
 map.insert_right_at("Macon", "Georgia", "Augusta")
 
 map.insert_left_at('Tallahassee', 'Alabama', 'Birmingham')
 map.insert_left_at('Birmingham', 'Alabama', 'Huntsville')
-map.insert_left_at('Huntsville', 'Tennessee', 'Selmer' )
+map.insert_left_at('Huntsville', 'Tennessee', 'Selmer')
 
 map.insert_left_at('Atlanta', 'Tennessee', 'Chattanooga')
 map.insert_left_at('Augusta', 'South_Carolina', 'Columbia')
-map.insert_left_at('Chattanooga', 'Tennessee', 'Nashville' )
+map.insert_left_at('Chattanooga', 'Tennessee', 'Nashville')
 map.insert_right_at('Chattanooga', 'Tennessee', 'Knoxville')
 map.insert_left_at('Nashville', 'Kentucky', 'Bowling_Green')
 map.insert_left_at('Knoxville', 'Virginia', 'Abingdon')
@@ -104,19 +116,19 @@ map.insert_right_at('Springfield', 'Missouri', 'Kansas_City')
 
 map.insert_left_at('St_Louis', 'Illinois', 'Champaign')
 map.insert_left_at('Champaign', 'Illinois', 'Chicago')
-map.insert_left_at('Chicago', 'Michigan', 'Grand_Rapids' )
+map.insert_left_at('Chicago', 'Michigan', 'Grand_Rapids')
 map.insert_left_at('Grand_Rapids', 'Michigan', 'Port_Huron')
 map.insert_left_at('Port_Huron', 'Canada', 'Canada_2')
 
-map.insert_left_at('Kansas_City', 'Iowa', 'Des_Moines' )
+map.insert_left_at('Kansas_City', 'Iowa', 'Des_Moines')
 map.insert_left_at('Des_Moines', 'Iowa', 'Mason_City')
 map.insert_left_at('Mason_City', 'Minnesota', 'Minneapolis')
 map.insert_left_at('Minneapolis', 'Minnesota', 'International_Falls')
-map.insert_left_at('International_Falls', 'Canada', 'Canada_1' )
+map.insert_left_at('International_Falls', 'Canada', 'Canada_1')
 
-map.insert_left_at('Bowling_Green', 'Kentucky', 'Louisville' )
+map.insert_left_at('Bowling_Green', 'Kentucky', 'Louisville')
 map.insert_right_at('Bowling_Green', 'Kentucky', 'Lexington')
-map.insert_left_at('Louisville', 'Indiana', 'Indianapolis' )
+map.insert_left_at('Louisville', 'Indiana', 'Indianapolis')
 map.insert_left_at('Indianapolis', 'Indiana', 'Fort_Wayne')
 map.insert_left_at('Fort_Wayne', 'Michigan', 'Ann_Arbor')
 map.insert_left_at('Ann_Arbor', 'Michigan', 'Detroit')
@@ -147,7 +159,7 @@ map.insert_left_at('Harrisburg', 'Pennsylvania', 'Mansfield')
 map.insert_left_at('Mansfield', 'New_York', 'Elmira')
 map.insert_left_at('Elmira', 'Buffalo', 'Canada_4')
 
-map.insert_left_at('Abingdon', 'Virginia', 'Roanoke' )
+map.insert_left_at('Abingdon', 'Virginia', 'Roanoke')
 map.insert_left_at('Roanoke', 'West_Virginia', 'Lewisburg')
 map.insert_left_at('Lewisburg', 'West_Virginia', 'Charleston')
 map.insert_left_at('Charleston', 'Ohio', 'Athens')
@@ -155,7 +167,6 @@ map.insert_left_at('Athens', 'Ohio', 'Akron')
 map.insert_left_at('Akron', 'Pennsylvania', 'Erie')
 map.insert_left_at('Erie', 'New_York', 'Buffalo-3')
 map.insert_left_at('Buffalo-3', 'Canada', 'Canada_6')
-
 
 # -----------------------------------------------------------------------------------------------------------------
 
