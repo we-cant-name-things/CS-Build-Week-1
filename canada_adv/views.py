@@ -57,6 +57,7 @@ def move_city(request):
         player.location = random_places[0]
         player.food_available = random.randint(1, 10)
         player.water_available = random.randint(1, 10)
+        player.state = new_city.state
 
         player.location_2 = random_places[1]
         player.food_available_2 = random.randint(1, 10)
