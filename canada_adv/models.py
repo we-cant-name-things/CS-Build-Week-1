@@ -21,19 +21,7 @@ class Player(models.Model):
         return "Player email:" + self.email + ", Current City:" + self.city + " Current State:" + self.state
 
 
-places = ('gas_station', 'hotel', 'fast_food', 'bank', 'store')
 
-import random
-
-
-def random_geneator_pick_2(tuple):
-    random_place_1 = random.choice(tuple)
-    random_place_2 = random.choice(tuple)
-
-    return [random_place_1, random_place_2]
-
-
-places = ('gas_station', 'hotel', 'fast_food', 'bank', 'store')
 
 
 class City:
