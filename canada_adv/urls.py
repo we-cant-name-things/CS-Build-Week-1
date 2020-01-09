@@ -10,5 +10,5 @@ router.register('players', views.PlayerViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("player/", views.player_info),
-    path("forward/", views.move_forward)
+    path("move/", views.move_city),
 ]
