@@ -21,9 +21,6 @@ class Player(models.Model):
         return "Player email:" + self.email + ", Current City:" + self.city + " Current State:" + self.state
 
 
-
-
-
 class City:
     def __init__(self, state, city):
         self.state = state
@@ -77,6 +74,21 @@ class Map:
                 current_city.right = new_city
                 new_city.previous = current_city
                 return "Success!"
+
+    def to_dict(self):
+        data = {}
+        queue = []
+        queue.append(self.start)
+        while len(queue) != 0:
+            city_viewed = queue.pop(0)
+            data[city_viewed.city] = {
+                'left': city_viewed.left.city if city_viewed.left else None,
+                'right': city_viewed.right.city if city_viewed.right else None,
+                'previous': city_viewed.previous.city if city_viewed.previous else None
+            }
+            if city_viewed.left: queue.append(city_viewed.left)
+            if city_viewed.right: queue.append(city_viewed.right)
+        return data
 
 
 map = Map()
