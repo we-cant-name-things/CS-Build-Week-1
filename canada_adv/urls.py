@@ -11,4 +11,5 @@ urlpatterns = [
     path("", include(router.urls)),
     path("player/", views.player_info),
     path("move/", views.move_city),
+    path("map/", views.map_endpoint),
 ]

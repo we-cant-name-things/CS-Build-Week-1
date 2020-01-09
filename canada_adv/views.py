@@ -54,7 +54,6 @@ def move_city(request):
         player.food = request.data.get('food')
         player.water = request.data.get('water')
 
-
         player.location = random_places[0]
         player.food_available = random.randint(1, 10)
         player.water_available = random.randint(1, 10)
@@ -76,3 +75,7 @@ def move_city(request):
     except ObjectDoesNotExist:
         return Response("Invalid email")
 
+
+@api_view(["GET"])
+def map_endpoint(request):
+    return Response(map.to_dict())
