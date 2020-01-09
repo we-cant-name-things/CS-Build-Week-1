@@ -8,5 +8,6 @@ router = routers.DefaultRouter()
 router.register('players', views.PlayerViewSet)
 
 urlpatterns = [
-    path("", include(router.urls))
+    path("", include(router.urls)),
+    path("player/", views.player_info)
 ]
