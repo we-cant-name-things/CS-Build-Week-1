@@ -39,20 +39,21 @@ def player_info(request):
 
 
 @api_view(["PUT"])
-def move_forward(request):
+def move_city(request):
     # email, next_city user chooses, food, water
     random_places = random_generator_pick_2(places)
     try:
-        next_city = map.search_map(request.data.get('next_city'))
+        new_city = map.search_map(request.data.get('new_city'))
 
-        left = next_city.left.city if next_city.left else None
-        right = next_city.right.city if next_city.right else None
-        previous = next_city.previous.city if next_city.previous else None
+        left = new_city.left.city if new_city.left else None
+        right = new_city.right.city if new_city.right else None
+        previous = new_city.previous.city if new_city.previous else None
 
         player = Player.objects.get(email=request.data.get('email'))
-        player.city = request.data.get('next_city')
+        player.city = request.data.get('new_city')
         player.food = request.data.get('food')
         player.water = request.data.get('water')
+
 
         player.location = random_places[0]
         player.food_available = random.randint(1, 10)
@@ -66,11 +67,12 @@ def move_forward(request):
 
         player_data = Player.objects.values().get(email=request.data.get('email'))
 
-        player_data[left] = left
-        player_data[right] = right
-        player_data[previous] = previous
+        player_data['left'] = left
+        player_data['right'] = right
+        player_data['previous'] = previous
 
         return Response(player_data)
 
     except ObjectDoesNotExist:
         return Response("Invalid email")
+
