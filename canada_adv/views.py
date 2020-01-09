@@ -22,7 +22,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
     serializer_class = PlayerSerializer
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 def player_info(request):
     try:
         player_data = Player.objects.values().get(email=request.data.get('email'))
