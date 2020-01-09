@@ -76,6 +76,6 @@ def move_city(request):
         return Response("Invalid email")
 
 
-@api_view(["PUT"])
+@api_view(["GET"])
 def map_endpoint(request):
     return Response(map.to_dict())
