@@ -62,10 +62,13 @@ def move_forward(request):
         player.food_available_2 = random.randint(1, 10)
         player.water_available_2 = random.randint(1, 10)
 
-
         player.save()
 
         player_data = Player.objects.values().get(email=request.data.get('email'))
+
+        player_data[left] = left
+        player_data[right] = right
+        player_data[previous] = previous
 
         return Response(player_data)
 
