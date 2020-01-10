@@ -180,6 +180,3 @@ x = {'city': 'Miami',
                                                                                                 'right': None},
                                                                                        'right': None}, 'right': None},
                                                'right': None}, 'right': None}}
-
-
-print(x)

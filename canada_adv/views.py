@@ -79,4 +79,5 @@ def move_city(request):
 
 @api_view(["GET"])
 def map_endpoint(request):
-    return Response(map.to_tree())
+    tree = map.to_dict(map.start)
+    return Response(tree)

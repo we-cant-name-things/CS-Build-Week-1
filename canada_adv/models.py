@@ -75,22 +75,7 @@ class Map:
                 new_city.previous = current_city
                 return "Success!"
 
-    def to_dict(self):
-        data = {}
-        queue = []
-        queue.append(self.start)
-        while len(queue) != 0:
-            city_viewed = queue.pop(0)
-            data[city_viewed.city] = {
-                'left': city_viewed.left.city if city_viewed.left else None,
-                'right': city_viewed.right.city if city_viewed.right else None,
-                'previous': city_viewed.previous.city if city_viewed.previous else None
-            }
-            if city_viewed.left: queue.append(city_viewed.left)
-            if city_viewed.right: queue.append(city_viewed.right)
-        return data
-
-    def to_tree(self, current_city):
+    def to_dict(self, current_city):
         if current_city == None: return
         data = {}
         data['city'] = current_city.city
@@ -98,6 +83,8 @@ class Map:
         data['right'] = self.to_dict(current_city.right)
 
         return data
+
+    # def to_dict(self, current_city):
 
 
 map = Map()
