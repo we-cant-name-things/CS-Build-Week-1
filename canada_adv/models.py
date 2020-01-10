@@ -90,6 +90,15 @@ class Map:
             if city_viewed.right: queue.append(city_viewed.right)
         return data
 
+    def to_tree(self, current_city):
+        if current_city == None: return
+        data = {}
+        data['city'] = current_city.city
+        data['left'] = self.to_dict(current_city.left)
+        data['right'] = self.to_dict(current_city.right)
+
+        return data
+
 
 map = Map()
 # where u at,   where you going: state, city.
