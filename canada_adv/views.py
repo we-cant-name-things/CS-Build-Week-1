@@ -115,3 +115,4 @@ def map_endpoint(request):
 #     ]
 #
 #     return Response(mapData)
+
