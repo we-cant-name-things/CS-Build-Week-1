@@ -79,12 +79,15 @@ class Map:
         if current_city == None: return
         data = {}
         data['name'] = current_city.city
-        data['attributes'] = current_city.state
-        data['children'] = [self.to_dict(current_city.left), self.to_dict(current_city.right)]
+        data['attributes'] = {'state': current_city.state}
+
+        data['children'] = []
+        child_1 = self.to_dict(current_city.left) if current_city.left is not None else None
+        child_2 = self.to_dict(current_city.right) if current_city.right is not None else None
+        if child_1 is not None: data['children'].append(child_1)
+        if child_2 is not None: data['children'].append(child_2)
+
         return data
-
-
-
 
 
 map = Map()
