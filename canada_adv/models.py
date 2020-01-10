@@ -75,19 +75,18 @@ class Map:
                 new_city.previous = current_city
                 return "Success!"
 
-    def to_dict(self):
+    def to_dict(self, current_city):
+        if current_city == None: return
         data = {}
-        queue = []
-        queue.append(self.start)
-        while len(queue) != 0:
-            city_viewed = queue.pop(0)
-            data[city_viewed.city] = {
-                'left': city_viewed.left.city if city_viewed.left else None,
-                'right': city_viewed.right.city if city_viewed.right else None,
-                'previous': city_viewed.previous.city if city_viewed.previous else None
-            }
-            if city_viewed.left: queue.append(city_viewed.left)
-            if city_viewed.right: queue.append(city_viewed.right)
+        data['name'] = current_city.city
+        data['attributes'] = {'state': current_city.state}
+
+        data['children'] = []
+        child_1 = self.to_dict(current_city.left) if current_city.left is not None else None
+        child_2 = self.to_dict(current_city.right) if current_city.right is not None else None
+        if child_1 is not None: data['children'].append(child_1)
+        if child_2 is not None: data['children'].append(child_2)
+
         return data
 
 
@@ -169,6 +168,8 @@ map.insert_left_at('Athens', 'Ohio', 'Akron')
 map.insert_left_at('Akron', 'Pennsylvania', 'Erie')
 map.insert_left_at('Erie', 'New_York', 'Buffalo-3')
 map.insert_left_at('Buffalo-3', 'Canada', 'Canada_6')
+
+print(map.to_dict(map.start))
 
 # -----------------------------------------------------------------------------------------------------------------
 
