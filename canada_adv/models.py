@@ -78,13 +78,13 @@ class Map:
     def to_dict(self, current_city):
         if current_city == None: return
         data = {}
-        data['city'] = current_city.city
-        data['left'] = self.to_dict(current_city.left)
-        data['right'] = self.to_dict(current_city.right)
-
+        data['name'] = current_city.city
+        data['attributes'] = current_city.state
+        data['children'] = [self.to_dict(current_city.left), self.to_dict(current_city.right)]
         return data
 
-    # def to_dict(self, current_city):
+
+
 
 
 map = Map()
@@ -165,6 +165,8 @@ map.insert_left_at('Athens', 'Ohio', 'Akron')
 map.insert_left_at('Akron', 'Pennsylvania', 'Erie')
 map.insert_left_at('Erie', 'New_York', 'Buffalo-3')
 map.insert_left_at('Buffalo-3', 'Canada', 'Canada_6')
+
+print(map.to_dict(map.start))
 
 # -----------------------------------------------------------------------------------------------------------------
 

@@ -77,42 +77,41 @@ def move_city(request):
         return Response("Invalid email")
 
 
-# @api_view(["GET"])
-# def map_endpoint(request):
-#     tree = map.to_dict(map.start)
-#     return Response(tree)
-
 @api_view(["GET"])
 def map_endpoint(request):
-    mapData= [
-        {
-        'name': 'Miami, Florida',
-        'children': [{   
-            'name': 'Jacksonville',
-            'attributes':{
-                'State': 'Florida'
-            },
-            'children':[{
-                'name':'test',
-                'attributes':{
-                    'State': 'GA'
-                }
-            }]
-        }, {
-            'name': 'Tallahassee',
-            'attributes':{
-                'State': 'Florida'
-            },
-            'children':[{
-                'name': 'test',
-                'attributes':{
-                    'State':'AL'
-                }
-            }]
-        }
-        ]
-        }
-    ]
+    tree = map.to_dict(map.start)
+    return Response(tree)
 
-    
-    return Response(mapData)
+# @api_view(["GET"])
+# def map_endpoint(request):
+#     mapData = [
+#         {
+#             'name': 'Miami, Florida',
+#             'children': [{
+#                 'name': 'Jacksonville',
+#                 'attributes': {
+#                     'State': 'Florida'
+#                 },
+#                 'children': [{
+#                     'name': 'test',
+#                     'attributes': {
+#                         'State': 'GA'
+#                     }
+#                 }]
+#             }, {
+#                 'name': 'Tallahassee',
+#                 'attributes': {
+#                     'State': 'Florida'
+#                 },
+#                 'children': [{
+#                     'name': 'test',
+#                     'attributes': {
+#                         'State': 'AL'
+#                     }
+#                 }]
+#             }
+#             ]
+#         }
+#     ]
+#
+#     return Response(mapData)
