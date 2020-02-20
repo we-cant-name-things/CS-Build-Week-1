@@ -36,7 +36,7 @@ def player_info(request):
 
 @api_view(["PUT"])
 def move_city(request):
-    # email, next_city user chooses, food, water
+    # user id, next_city user chooses, food, water
     random_places = random_generator_pick_2()
 
     us_map = Map()
@@ -48,7 +48,7 @@ def move_city(request):
         right = new_city.right.city if new_city.right else None
         previous = new_city.previous.city if new_city.previous else None
 
-        player = UserInfo.objects.get(email=request.data.get('email'))
+        player = UserInfo.objects.get(user_id=request.data.get('user_id'))
         player.city = request.data.get('new_city')
         player.food = request.data.get('food')
         player.water = request.data.get('water')
@@ -64,7 +64,7 @@ def move_city(request):
 
         player.save()
 
-        player_data = UserInfo.objects.values().get(email=request.data.get('email'))
+        player_data = UserInfo.objects.values().get(user_id=request.data.get('user_id'))
 
         player_data['left'] = left
         player_data['right'] = right
@@ -73,7 +73,7 @@ def move_city(request):
         return Response(player_data)
 
     except ObjectDoesNotExist:
-        return Response("Invalid email")
+        return Response("Invalid User Id")
 
 
 @api_view(["GET"])
