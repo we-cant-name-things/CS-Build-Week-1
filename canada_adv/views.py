@@ -1,6 +1,6 @@
 from .models import Player
 
-from .utils import us_map, random_generator_pick_2
+from .utils import Map, random_generator_pick_2
 
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -18,6 +18,8 @@ class PlayerViewSet(viewsets.ModelViewSet):
 
 @api_view(["POST"])
 def player_info(request):
+    us_map = Map()
+    us_map.populate_map()
     try:
         player_data = Player.objects.values().get(email=request.data.get('email'))
         current_city = us_map.search_map(player_data.get('city'))
@@ -36,6 +38,9 @@ def player_info(request):
 def move_city(request):
     # email, next_city user chooses, food, water
     random_places = random_generator_pick_2()
+
+    us_map = Map()
+    us_map.populate_map()
     try:
         new_city = us_map.search_map(request.data.get('new_city'))
 
@@ -73,5 +78,7 @@ def move_city(request):
 
 @api_view(["GET"])
 def map_endpoint(request):
-    tree = us_map.to_dict(us_map.start)
-    return Response(tree)
+    us_map = Map()
+    us_map.populate_map()
+    us_map_dict = us_map.to_dict(us_map.start)
+    return Response(us_map_dict)
