@@ -1,15 +1,15 @@
 from django.urls import path, include
 
-from . import views
+from . import api
 
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register('players', views.PlayerViewSet)
+router.register('users', api.UserInfoViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("player/", views.player_info),
-    path("move/", views.move_city),
-    path("map/", views.map_endpoint),
+    path("user/", api.UserInfoViewSet),
+    path("move/", api.move_city),
+    path("map/", api.map_endpoint),
 ]

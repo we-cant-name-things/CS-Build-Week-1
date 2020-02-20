@@ -1,19 +1,19 @@
-from .models import Player
+from .models import UserInfo
 
 from .utils import Map, random_generator_pick_2
 
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import PlayerSerializer
+from .serializers import UserInfoSerializer
 from django.core.exceptions import ObjectDoesNotExist
 
 import random
 
 
-class PlayerViewSet(viewsets.ModelViewSet):
-    queryset = Player.objects.all()
-    serializer_class = PlayerSerializer
+class UserInfoViewSet(viewsets.ModelViewSet):
+    queryset = UserInfo.objects.all()
+    serializer_class = UserInfoSerializer
 
 
 @api_view(["POST"])
@@ -21,7 +21,7 @@ def player_info(request):
     us_map = Map()
     us_map.populate_map()
     try:
-        player_data = Player.objects.values().get(email=request.data.get('email'))
+        player_data = UserInfo.objects.values().get(email=request.data.get('email'))
         current_city = us_map.search_map(player_data.get('city'))
         if current_city == -1:
             return Response("Player City does not exit")
@@ -48,7 +48,7 @@ def move_city(request):
         right = new_city.right.city if new_city.right else None
         previous = new_city.previous.city if new_city.previous else None
 
-        player = Player.objects.get(email=request.data.get('email'))
+        player = UserInfo.objects.get(email=request.data.get('email'))
         player.city = request.data.get('new_city')
         player.food = request.data.get('food')
         player.water = request.data.get('water')
@@ -64,7 +64,7 @@ def move_city(request):
 
         player.save()
 
-        player_data = Player.objects.values().get(email=request.data.get('email'))
+        player_data = UserInfo.objects.values().get(email=request.data.get('email'))
 
         player_data['left'] = left
         player_data['right'] = right
