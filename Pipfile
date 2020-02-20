@@ -15,8 +15,6 @@ gunicorn = "*"
 django-heroku = "*"
 django-rest-api = "*"
 whitenoise = "*"
-djangorestframework-jwt = "*"
-djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

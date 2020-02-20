@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import UserInfo
+from .models import Player
 
 
-class UserInfoSerializer(serializers.ModelSerializer):
+class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserInfo
-        fields = ['user_id', 'food', 'water',
+        model = Player
+        fields = ['id', 'email', 'food', 'water',
                   'state', 'city',
                   'location', 'food_available', 'water_available',
                   'location_2', 'food_available_2', 'water_available_2']
